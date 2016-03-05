@@ -545,7 +545,7 @@ HRESULT WINAPI D3D9ProxyStateBlock::SelectAndCaptureStateVSConst(UINT StartRegis
 
 	// The assumption here is that most registers won't need to be stereo so we set them all on the actual device imiediately and overwrite the stereo ones 
 	// when we Apply. (if there are any). This Simplifies "Apply" when this block is applied later.
-	HRESULT result = m_pOwningDevice->SetVertexShaderConstantF(StartRegister, pConstantData, Vector4fCount);
+	HRESULT result = (*(D3DProxyDevice*)m_pOwningDevice).BaseDirect3DDevice9::SetVertexShaderConstantF(StartRegister, pConstantData, Vector4fCount);
 
 	if (SUCCEEDED(result)) {
 		// Mark these registers as being tracked and save them
